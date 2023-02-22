@@ -10,9 +10,9 @@ void print_times_table(int n)
 {
 	int numb, mult, prodt;
 
-	if (n >= 0 && n <=15)
+	if (n >= 0 && n <= 15)
 	{
-		for (numb = 0; numb <=n; numb++)
+		for (numb = 0; numb <= n; numb++)
 		{
 			_putchar('0');
 			for (mult = 1; mult <= n; mult++)
