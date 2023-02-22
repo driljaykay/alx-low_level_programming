@@ -13,7 +13,7 @@ int main(void)
 
 	sum = 0;
 
-	for (v = 0 ; v < 10 ; v++)
+	for (v = 0 ; v < 1024 ; v++)
 	{
 		if ((v % 3 == 0) || (v % 5 == 0))
 		{
