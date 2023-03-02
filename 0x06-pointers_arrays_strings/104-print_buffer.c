@@ -2,9 +2,9 @@
 #include <stdio.h>
 
 /**
- * print_buffer - prints buffer
- * @b: buffer
- * @size: size
+ * print_buffer - function that prints a buffer
+ * @b: content of size bytes of the buffer
+ * @size: size of buffer
  * Return: void
  */
 
@@ -28,7 +28,7 @@ void print_buffer(char *b, int size)
 			if (c < d)
 				printf("%02x", *(b + a + c));
 			else
-				printf(" ");
+				printf("  ");
 			if (c % 2)
 			{
 				printf(" ");
