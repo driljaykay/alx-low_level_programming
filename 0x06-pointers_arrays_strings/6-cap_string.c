@@ -33,4 +33,4 @@ char *cap_string(char *str)
 		k++;
 	}
 	return (str);
- }
+}
