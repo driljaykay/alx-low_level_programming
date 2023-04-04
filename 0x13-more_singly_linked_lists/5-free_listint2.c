@@ -3,23 +3,25 @@
 #include "lists.h"
 
 /**
- * free_listint2 - Frees a listint_t list and sets the head to NULL.
- * @head: Pointer to a pointer to the head node.
+ * free_listint2 - frees a listint_t list and sets the head to NULL
+ * @head: pointer to pointer to head of list
+ *
+ * Return: void
  */
 
 void free_listint2(listint_t **head)
 {
-	listint_t *present, *fal;
+	listint_t *fal;
+	unsigned int k;
 
 	if (head == NULL)
 		return;
 
-	present = *head;
-	while (present != NULL)
+	for (k = 0; *head != NULL; k++)
 	{
-		present = fal;
-		fal = present->next;
-		free(present);
+		fal = *head;
+		*head = (*head)->next;
+		free(fal);
 	}
 	*head = NULL;
 }

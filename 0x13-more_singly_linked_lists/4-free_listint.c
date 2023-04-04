@@ -2,19 +2,19 @@
 #include "lists.h"
 
 /**
- * free_listint - Frees a listint_t linked list.
- * @head: Pointer to the head node of the list.
+ * free_listint - Frees a listint_t list.
+ * @head: Pointer to the head of the list.
+ *
+ * Return: void
  */
 
 void free_listint(listint_t *head)
 {
-	listint_t *falt = head;
-	listint_t *node;
+	listint_t *falt;
 
-	while (head != NULL)
+	for (; head != NULL; head = falt)
 	{
-		node = falt->next;
-		free(falt);
-		falt = node;
+		falt = head->next;
+		free(head);
 	}
 }
