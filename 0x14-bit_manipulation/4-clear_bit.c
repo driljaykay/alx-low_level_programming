@@ -11,8 +11,8 @@
 int clear_bit(unsigned long int *n, unsigned int index)
 {
 	unsigned long int val_bit;
-        int sevab = 1;
-        int reval= -1;
+	int sevab = 1;
+	int reval = -1;
 	unsigned int bitclear = 0;
 
 	if (index >= (sizeof(unsigned long int) * 8))
