@@ -1,32 +1,20 @@
 #include "main.h"
-#include <stdio.h>
 
 /**
  * print_binary - prints the binary representation of a number
  * @n: the number to print in binary
+ *
+ * Return: void
  */
 
 void print_binary(unsigned long int n)
 {
-	unsigned long int binary_rep = 1UL << ((sizeof(unsigned long int) * 8) - 1);
-	int printed = 0;
+	unsigned int pbrn = 1;
 
-	if (n == 0)
-	{
-		_putchar('0');
-		return;
-	}
+	if (n > pbrn) /* checks if the number is greater than 1 */
+		print_binary(n >> pbrn); /* recursively calls itself with
+					* the number shifted right by one bit
+					*/
 
-	do {
-		if (n & binary_rep)
-		{
-			_putchar('1');
-			printed = 1;
-		}
-		else if (printed)
-		{
-			_putchar('0');
-		}
-		binary_rep >>= 1;
-	} while (binary_rep != 0);
+	_putchar((n & pbrn) + '0');
 }
