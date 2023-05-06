@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "main.h"
 
 /**
@@ -14,8 +13,7 @@ void print_binary(unsigned long int n)
 
 	if (n > pbrn) /* checks if the number is greater than 1 */
 		print_binary(n >> pbrn); /* recursively calls itself with
-					* the number shifted right by one bit
-					*/
-
+					    * the number shifted right by one bit
+					    */
 	_putchar((n & pbrn) + '0');
 }
