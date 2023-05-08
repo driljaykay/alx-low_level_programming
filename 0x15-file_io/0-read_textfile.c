@@ -40,7 +40,8 @@ ssize_t read_textfile(const char *filename, size_t letters)
 		}
 		else
 		{
-			num_of_byt_writ = write(STDOUT_FILENO, buffer, (size_t)(letters - total_num_of_byt));
+			num_of_byt_writ = write(STDOUT_FILENO, buffer,
+					(size_t)(letters - total_num_of_byt));
 		}
 		if (num_of_byt_writ == -1)
 			return (0);
