@@ -5,7 +5,7 @@
  * @filename: name of the file to create
  * @text_content: a NULL terminated string to write to the file
  *
- * Returns: 1 on success, -1 on failure
+ * Return: 1 on success, -1 on failure
  * filename is NULL return -1
  */
 
