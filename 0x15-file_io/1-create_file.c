@@ -19,7 +19,7 @@ int create_file(const char *filename, char *text_content)
 	if (text_content == NULL)
 		text_content = "";
 
-	file_descriptor = open(filename, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+	file_descriptor = open(filename, O_WRONLY | O_CREAT | O_TRUNC);
 
 	if (file_descriptor == failure)
 		return (failure);
@@ -39,6 +39,9 @@ int create_file(const char *filename, char *text_content)
 	res_wr_fcn = close(file_descriptor);
 
 	if (res_wr_fcn == failure)
+		return (failure);
+
+	if (chmod(filename, 0600) == failure)
 		return (failure);
 
 	return (success);
