@@ -92,3 +92,34 @@ if (write_content_of_file(file_to, buffer, read_bytes) < 0)
 
 return (EXIT_SUCCESS);
 }
+
+/**
+ * main - a function that calls copy_content_from_one_to_another
+ * to copy the content of a file to another file.
+ * @argc: number of arguments passed to the program
+ * @argv: array of pointers to the arguments
+ *
+ * Return: 0 on success, or an error code on failure
+ */
+
+int main(int argc, char *argv[])
+{
+if (argc != 3)
+{
+        dprintf(STDERR_FILENO, "Usage: %s file_from file_to\n", argv[0]);
+        exit(97);
+}
+
+if (copy_content_from_one_to_another(argv[1], argv[2]) == -1)
+{
+        exit(101);
+}
+
+if (chmod(argv[2], S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH) == -1)
+{
+        dprintf(STDERR_FILENO, "Error: Can't set file permissions for %s\n", argv[2]);
+        exit(101);
+}
+
+return (EXIT_SUCCESS);
+}
