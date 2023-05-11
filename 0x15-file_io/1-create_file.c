@@ -11,37 +11,29 @@
 
 int create_file(const char *filename, char *text_content)
 {
-	int file_descriptor, res_wr_fcn, index, success = 1, failure = -1;
+	int file_descriptor, res_wr_fcn, index = 0, success = 1, failure = -1;
 
 	if (filename == NULL)
-		return (failure);
-
-	if (text_content == NULL)
-		text_content = "";
-
-	file_descriptor = open(filename, O_WRONLY | O_CREAT | O_TRUNC);
-
-	if (file_descriptor == failure)
-		return (failure);
-
-	index = 0;
+        return (failure);
+	
+	if (text_content)
+	{
+		while (text_content[index])
+			index++;
+	}
+	
 	do {
-		res_wr_fcn = write(file_descriptor, text_content, index;
-
-		if (res_wr_fcn == failure)
-		{
-			close(file_descriptor);
-			return (failure);
-		}
-		index++;
-	} while (*(text_content[index]) != '\0');
-
-	res_wr_fcn = close(file_descriptor);
-
-	if (res_wr_fcn == failure)
-		return (failure);
-
-	if (chmod(filename, S_IRUSR | S_IWUSiR) == failure)
+		file_descriptor = open(filename, O_CREAT | O_WRONLY | O_TRUNC);
+	} while (file_descriptor == failure);
+	
+	if (text_content)
+	{
+		do {
+			res_wr_fcn = write(file_descriptor, text_content, index);
+		} while (res_wr_fcn == failure);
+	}
+	
+	if (chmod(filename, S_IRUSR | S_IWUSR) == failure)
 		return (failure);
 
 	return (success);
