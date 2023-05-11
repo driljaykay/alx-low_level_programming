@@ -106,19 +106,19 @@ int main(int argc, char *argv[])
 {
 if (argc != 3)
 {
-        dprintf(STDERR_FILENO, "Usage: %s file_from file_to\n", argv[0]);
-        exit(97);
+	dprintf(STDERR_FILENO, "Usage: %s file_from file_to\n", argv[0]);
+	exit(97);
 }
 
 if (copy_content_from_one_to_another(argv[1], argv[2]) == -1)
 {
-        exit(101);
+	exit(101);
 }
 
 if (chmod(argv[2], S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH) == -1)
 {
-        dprintf(STDERR_FILENO, "Error: Can't set file permissions for %s\n", argv[2]);
-        exit(101);
+	dprintf(STDERR_FILENO, "Error: Can't set file permissions for %s\n", argv[2]);
+	exit(101);
 }
 
 return (EXIT_SUCCESS);
