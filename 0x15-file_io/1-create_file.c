@@ -26,7 +26,7 @@ int create_file(const char *filename, char *text_content)
 
 	index = 0;
 	do {
-		res_wr_fcn = write(file_descriptor, text_content + index, success);
+		res_wr_fcn = write(file_descriptor, text_content, index;
 
 		if (res_wr_fcn == failure)
 		{
@@ -34,14 +34,14 @@ int create_file(const char *filename, char *text_content)
 			return (failure);
 		}
 		index++;
-	} while (*(text_content + index - success) != '\0');
+	} while (*(text_content[index]) != '\0');
 
 	res_wr_fcn = close(file_descriptor);
 
 	if (res_wr_fcn == failure)
 		return (failure);
 
-	if (chmod(filename, S_IRUSR | S_IWUSR) == failure)
+	if (chmod(filename, S_IRUSR | S_IWUSiR) == failure)
 		return (failure);
 
 	return (success);
