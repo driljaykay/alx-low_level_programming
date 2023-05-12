@@ -14,7 +14,7 @@ ssize_t read_bytes;
 source_file = open(filename, O_RDONLY);
 if (source_file == failure)
 {
-	dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", filename);
+	dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 	return (failure);
 }
 
@@ -50,7 +50,7 @@ ssize_t bytes_written;
 destination_file = open(filename, O_WRONLY | O_CREAT | O_TRUNC);
 if (destination_file == failure)
 {
-	dprintf(STDERR_FILENO, "Error: Can't write to %s\n", filename);
+	dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 	return (failure);
 }
 
@@ -106,18 +106,18 @@ int main(int argc, char *argv[])
 {
 if (argc != 3)
 {
-	dprintf(STDERR_FILENO, "Usage: %s file_from file_to\n", argv[0]);
+	dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 	exit(97);
 }
 
 if (copy_content_from_one_to_another(argv[1], argv[2]) == -1)
 {
-	exit(101);
+	exit(100);
 }
 
 if (chmod(argv[2], S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH) == -1)
 {
-	dprintf(STDERR_FILENO, "Error: Can't set file permissions for %s\n", argv[2]);
+	dprintf(STDERR_FILENO, "Error: Can't close fd %s\n", argv[2]);
 	exit(101);
 }
 
