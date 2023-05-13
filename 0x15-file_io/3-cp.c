@@ -14,21 +14,21 @@ ssize_t read_bytes;
 source_file = open(filename, O_RDONLY);
 if (source_file == failure)
 {
-	dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
-	return (failure);
+	dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", filename);
+	exit(98);
 }
 
 read_bytes = read(source_file, buffer, 1024);
 if (read_bytes == failure)
 {
 	dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", filename);
-	return (failure);
+	exit(98);
 }
 
 if (close(source_file) == failure)
 {
 	dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", source_file);
-	return (failure);
+	exit(100);
 }
 
 return (read_bytes);
@@ -47,24 +47,25 @@ int write_content_of_file(char *filename, char *buffer, ssize_t length)
 int destination_file, failure = -1, success = 1;
 ssize_t bytes_written;
 
-destination_file = open(filename, O_WRONLY | O_CREAT | O_TRUNC);
+destination_file = open(filename, O_WRONLY | O_CREAT | O_TRUNC
+		, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
 if (destination_file == failure)
 {
-	dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
-	return (failure);
+	dprintf(STDERR_FILENO, "Error: Can't write to %s\n", filename);
+	exit(99);
 }
 
 bytes_written = write(destination_file, buffer, length);
-if (bytes_written != length)
+if (bytes_written == failure)
 {
 	dprintf(STDERR_FILENO, "Error: Can't write to %s\n", filename);
-	return (failure);
+	exit(99);
 }
 
 if (close(destination_file) == failure)
 {
 	dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", destination_file);
-	return (failure);
+	exit(100);
 }
 
 return (success);
@@ -84,13 +85,10 @@ char buffer[1024];
 ssize_t read_bytes;
 
 read_bytes = read_content_of_file(file_from, buffer);
-if (read_bytes < 0)
-	exit(98);
 
-if (write_content_of_file(file_to, buffer, read_bytes) < 0)
-	exit(99);
+write_content_of_file(file_to, buffer, read_bytes);
 
-return (EXIT_SUCCESS);
+return (0);
 }
 
 /**
@@ -110,16 +108,6 @@ if (argc != 3)
 	exit(97);
 }
 
-if (copy_content_from_one_to_another(argv[1], argv[2]) == -1)
-{
-	exit(100);
-}
-
-if (chmod(argv[2], S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH) == -1)
-{
-	dprintf(STDERR_FILENO, "Error: Can't close fd %s\n", argv[2]);
-	exit(101);
-}
-
-return (EXIT_SUCCESS);
+copy_content_from_one_to_another(argv[1], argv[2]);
+return (0);
 }
