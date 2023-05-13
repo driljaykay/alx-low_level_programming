@@ -23,7 +23,8 @@ int create_file(const char *filename, char *text_content)
 	}
 
 	do {
-		file_descriptor = open(filename, O_CREAT | O_WRONLY | O_TRUNC);
+		file_descriptor = open(filename, O_CREAT | O_WRONLY | O_TRUNC
+				, S_IRUSR | S_IWUSR);
 	} while (file_descriptor == failure);
 
 	if (text_content)
@@ -33,8 +34,7 @@ int create_file(const char *filename, char *text_content)
 		} while (res_wr_fcn == failure);
 	}
 
-	if (chmod(filename, S_IRUSR | S_IWUSR) == failure)
-		return (failure);
+	close(file_descriptor);
 
 	return (success);
 }
