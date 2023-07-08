@@ -26,5 +26,5 @@ int get_bit(unsigned long int n, unsigned int index)
 		index--;
 	} while (n != 0);
 
-	return (bitvalue);
+	return (bitvalue != 0);
 }
