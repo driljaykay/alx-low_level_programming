@@ -11,7 +11,7 @@
 int append_text_to_file(const char *filename, char *text_content)
 {
 	int file_descriptor, index, success = 1, failure = -1;
-	int w;
+	ssize_t w;
 
 	if (filename == NULL)
 		return (failure);
@@ -38,6 +38,9 @@ int append_text_to_file(const char *filename, char *text_content)
 	close(file_descriptor);
 
 	if (w == failure)
+		return (failure);
+
+	if (chmod(filename, 0664) == failure)
 		return (failure);
 
 	return (success);
